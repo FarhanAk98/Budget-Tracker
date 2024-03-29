@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Budget Tracker</title>
+</head>
+<body>
+    <div id="MBody">
+        <aside>
+            <div id="Form1">
+                <p>Enter monthly budget:</p>
+                <input type="text" id="BudgetValue">
+                <input type="button" id="UpdateBudget" value="Add">
+            </div>
+
+            <div id="Form2">
+                <p>Enter expence: </p>
+                <input type="text" id="item">
+
+                <p>Cost: </p>
+                <input type="text" id="cost">
+
+                <p>Flexibility: </p>
+                <input type="radio" id="modifiable" name="flexibility" value="modifiable" checked>Modifiable
+                <input type="radio" id="fixed" name="flexibility" value="fixed">Fixed
+
+                <input type="button" id="AddExpence" value="Add Expence">
+            </div>
+            <p id="Error"></p>
+        </aside>
+        <div id="pocket">
+            <div></div>
+        </div>
+        <div id="plastic">
+        </div>
+        <header>
+            <h2 id="Budget"></h2>
+            <h2 id="Savings"></h2>
+        </header>
+        <main>
+            <div></div>
+            <div id="xAxis">
+            </div>
+            <div id="yAxis"></div>
+            <div id="buttons">
+                <button id="plus">+</button>
+                <button id="minus">-</button>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
