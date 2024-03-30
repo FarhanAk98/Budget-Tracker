@@ -1,16 +1,16 @@
 const $ = selector => document.querySelector(selector); 
 
-let expences = [];
+let expenses = [];
 let Budget = 0, AmountSpent = 0, maxExp = 0, height = 0, mousePressed = -1;
 
 function SetBars(){
-    let Total = expences.length;
+    let Total = expenses.length;
     let width = 80 / Total;
     let gap = 20 / (Total + 1);
     let xPos = gap;
     AmountSpent = 0;
     let pos1 = 0, pos2 = 0;
-    for(exp of expences){
+    for(exp of expenses){
         height = (exp.itemCost / maxExp) * 330;
         AmountSpent += exp.itemCost;
         const bar = '.Bar.' + exp.itemName;
@@ -60,7 +60,7 @@ function SetBars(){
                 pos1 = pos2 - e.clientY;
                 pos2 = e.clientY;
                 if((pos1 - $(bar).offsetTop) < 331 & (pos1 - $(bar).offsetTop) > 2){
-                    let ex = expences.find(ex => ex.itemName === bar.slice(5, bar.length));
+                    let ex = expenses.find(ex => ex.itemName === bar.slice(5, bar.length));
 
                     $(bar).style.height = ($(bar).offsetHeight + pos1) + 'px';
                     $(bar).style.top = ($(bar).offsetTop - pos1) + 'px';
@@ -93,8 +93,8 @@ function SetBars(){
 
         $(bar + ' .deleteBar').addEventListener('click', () => {
             if($(bar) !== null){
-                let ex = expences.find(ex => ex.itemName === bar.slice(5, bar.length));
-                expences.splice(expences.indexOf(ex), 1);
+                let ex = expenses.find(ex => ex.itemName === bar.slice(5, bar.length));
+                expenses.splice(expenses.indexOf(ex), 1);
                 $(bar).remove();
                 $(line).remove();
                 $(label).remove();
@@ -120,9 +120,9 @@ function UpdateSavings(amt){
 }
 
 function UpdateHeight(dir){
-    if(expences.length > 0 & ((dir == -1 & maxExp > 10) || (dir == 1 & maxExp <= 10000))){
+    if(expenses.length > 0 & ((dir == -1 & maxExp > 10) || (dir == 1 & maxExp <= 10000))){
         maxExp += 10 * dir * (maxExp * 0.001);
-        for(exp of expences){
+        for(exp of expenses){
             height = (exp.itemCost / maxExp) * 330;
             const bar = '.Bar.' + exp.itemName;
             const line = '.line.' + exp.itemName;
@@ -168,7 +168,7 @@ $('#minus').onmouseup = () => {
     StopUpdateHeight();
 };
 
-$('#AddExpence').addEventListener('click', () => {
+$('#AddExpense').addEventListener('click', () => {
     $('#Error').innerText = "";
 
     const exp = {
@@ -177,14 +177,14 @@ $('#AddExpence').addEventListener('click', () => {
         Flexibility: $('input[name="flexibility"]:checked').value
     };
 
-    if(expences.some(ex => ex.itemName === exp.itemName)){
+    if(expenses.some(ex => ex.itemName === exp.itemName)){
         $('#Error').innerText = "Please fill new values.";
     }
     else if(exp.itemName == "" || isNaN(exp.itemCost)){
         $('#Error').innerText = "Please fill appropriate values.";
     }
     else{
-        expences.push(exp);
+        expenses.push(exp);
 
         maxExp = Math.max(maxExp, exp.itemCost);
 
